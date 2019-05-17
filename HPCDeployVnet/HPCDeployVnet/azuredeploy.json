@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {
+    "HPC-SpokeVirtualNetworkPrefix": "10.0.0.0/16",
+    "HPC-SpokeVirtualNetworkSubnet1Name": "Subnet-1",
+    "HPC-SpokeVirtualNetworkSubnet1Prefix": "10.0.0.0/24",
+    "HPC-SpokeVirtualNetworkSubnet2Name": "Subnet-2",
+    "HPC-SpokeVirtualNetworkSubnet2Prefix": "10.0.1.0/24",
+    "HPC-SpokeVirtualNetworkSubnet3Name": "Subnet-3",
+    "HPC-SpokeVirtualNetworkSubnet3Prefix": "10.0.2.0/24"},
+  "resources": [
+    {
+      "name": "HPC-SpokeVirtualNetwork",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "HPC-SpokeVirtualNetwork"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('HPC-SpokeVirtualNetworkPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('HPC-SpokeVirtualNetworkSubnet1Name')]",
+            "properties": {
+              "addressPrefix": "[variables('HPC-SpokeVirtualNetworkSubnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('HPC-SpokeVirtualNetworkSubnet2Name')]",
+            "properties": {
+              "addressPrefix": "[variables('HPC-SpokeVirtualNetworkSubnet2Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('HPC-SpokeVirtualNetworkSubnet3Name')]",
+            "properties": {
+              "addressPrefix": "[variables('HPC-SpokeVirtualNetworkSubnet3Prefix')]"
+            }
+          }
+        ]
+      }
+    }],
+  "outputs": {}
+}
